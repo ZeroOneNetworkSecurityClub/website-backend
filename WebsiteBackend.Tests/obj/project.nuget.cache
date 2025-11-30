@@ -1,0 +1,53 @@
+{
+  "version": 2,
+  "dgSpecHash": "qACsmBgB+I0=",
+  "success": false,
+  "projectFilePath": "C:\\Users\\aipno\\code\\website-backend\\WebsiteBackend.Tests\\WebsiteBackend.Tests.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "无法解析 net10.0 的“coverlet.collector (>= 6.0.4)”。",
+      "projectPath": "C:\\Users\\aipno\\code\\website-backend\\WebsiteBackend.Tests\\WebsiteBackend.Tests.csproj",
+      "filePath": "C:\\Users\\aipno\\code\\website-backend\\WebsiteBackend.Tests\\WebsiteBackend.Tests.csproj",
+      "libraryId": "coverlet.collector",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "无法解析 net10.0 的“Microsoft.NET.Test.Sdk (>= 17.14.1)”。",
+      "projectPath": "C:\\Users\\aipno\\code\\website-backend\\WebsiteBackend.Tests\\WebsiteBackend.Tests.csproj",
+      "filePath": "C:\\Users\\aipno\\code\\website-backend\\WebsiteBackend.Tests\\WebsiteBackend.Tests.csproj",
+      "libraryId": "Microsoft.NET.Test.Sdk",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "无法解析 net10.0 的“xunit (>= 2.9.3)”。",
+      "projectPath": "C:\\Users\\aipno\\code\\website-backend\\WebsiteBackend.Tests\\WebsiteBackend.Tests.csproj",
+      "filePath": "C:\\Users\\aipno\\code\\website-backend\\WebsiteBackend.Tests\\WebsiteBackend.Tests.csproj",
+      "libraryId": "xunit",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1100",
+      "level": "Error",
+      "message": "无法解析 net10.0 的“xunit.runner.visualstudio (>= 3.1.4)”。",
+      "projectPath": "C:\\Users\\aipno\\code\\website-backend\\WebsiteBackend.Tests\\WebsiteBackend.Tests.csproj",
+      "filePath": "C:\\Users\\aipno\\code\\website-backend\\WebsiteBackend.Tests\\WebsiteBackend.Tests.csproj",
+      "libraryId": "xunit.runner.visualstudio",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
+}
