@@ -75,6 +75,9 @@ app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
+// Add global exception handler middleware
+app.UseMiddleware<GlobalExceptionHandler>();
+
 // Add response middleware
 app.UseMiddleware<ResponseMiddleware>();
 

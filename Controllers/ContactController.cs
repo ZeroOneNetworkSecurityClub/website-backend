@@ -18,25 +18,8 @@ public class ContactController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetContact()
     {
-        // 直接返回测试数据，避免复杂查询和序列化问题
-        var result = new {
-            details = new List<object> {
-                new { Type = "邮箱", Value = "contact@lingyi-sec.com" },
-                new { Type = "QQ群", Value = "123456789" }
-            },
-            socialLinks = new List<object> {
-                new { Name = "GitHub", Url = "https://github.com/lingyi-sec" },
-                new { Name = "微博", Url = "https://weibo.com/lingyi-sec" }
-            },
-            joinUs = new {
-                description = "欢迎对网络安全感兴趣的同学加入我们！",
-                conditions = new List<string> { "对网络安全感兴趣", "遵守社团章程", "积极参与活动" },
-                steps = new List<string> { "填写申请表", "参加面试", "通过培训" },
-                applicationUrl = "https://example.com/join"
-            }
-        };
-        
-        return Ok(ApiResponse<object>.SuccessResponse(result));
+        var contact = await _contactService.GetContactAsync();
+        return Ok(ApiResponse<Contact>.SuccessResponse(contact));
     }
 
     [HttpGet("details")]

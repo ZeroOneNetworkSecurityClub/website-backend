@@ -60,5 +60,28 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<JoinUsInfo>()
             .Ignore(j => j.Conditions)
             .Ignore(j => j.Steps);
+
+        // 添加数据库索引
+        // Activity索引
+        modelBuilder.Entity<Activity>()
+            .HasIndex(a => a.Date);
+        modelBuilder.Entity<Activity>()
+            .HasIndex(a => a.Status);
+
+        // Member索引
+        modelBuilder.Entity<Member>()
+            .HasIndex(m => m.Type);
+
+        // HistoryItem索引
+        modelBuilder.Entity<HistoryItem>()
+            .HasIndex(h => h.Year);
+
+        // ContactDetail索引
+        modelBuilder.Entity<ContactDetail>()
+            .HasIndex(cd => cd.Type);
+
+        // SocialLink索引
+        modelBuilder.Entity<SocialLink>()
+            .HasIndex(sl => sl.Name);
     }
 }
