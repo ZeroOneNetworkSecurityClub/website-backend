@@ -25,6 +25,7 @@ public class ApplicationDbContext : DbContext
 
         // 配置About实体
         modelBuilder.Entity<About>()
+            .Ignore(a => a.Missions)
             .HasMany(a => a.History)
             .WithOne(h => h.About)
             .HasForeignKey(h => h.AboutId)
@@ -54,5 +55,33 @@ public class ApplicationDbContext : DbContext
             .WithOne(j => j.Contact)
             .HasForeignKey<JoinUsInfo>(j => j.ContactId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        // 配置JoinUsInfo实体，忽略Conditions和Steps属性
+        modelBuilder.Entity<JoinUsInfo>()
+            .Ignore(j => j.Conditions)
+            .Ignore(j => j.Steps);
+
+        // 添加数据库索引
+        // Activity索引
+        modelBuilder.Entity<Activity>()
+            .HasIndex(a => a.Date);
+        modelBuilder.Entity<Activity>()
+            .HasIndex(a => a.Status);
+
+        // Member索引
+        modelBuilder.Entity<Member>()
+            .HasIndex(m => m.Type);
+
+        // HistoryItem索引
+        modelBuilder.Entity<HistoryItem>()
+            .HasIndex(h => h.Year);
+
+        // ContactDetail索引
+        modelBuilder.Entity<ContactDetail>()
+            .HasIndex(cd => cd.Type);
+
+        // SocialLink索引
+        modelBuilder.Entity<SocialLink>()
+            .HasIndex(sl => sl.Name);
     }
 }
