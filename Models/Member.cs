@@ -8,7 +8,7 @@ public class Member
     public string Description { get; set; } = string.Empty;
     public MemberType Type { get; set; }
     public string Avatar { get; set; } = string.Empty;
-    public DateTime JoinedAt { get; set; } = DateTime.Now;
+    public System.DateTime JoinedAt { get; set; } = System.DateTime.Now;
 }
 
 public enum MemberType

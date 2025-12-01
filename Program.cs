@@ -12,10 +12,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("数据库连接字符串未配置")));
 
-// Add controllers
-builder.Services.AddControllers();
+// Add controllers with JSON options to handle circular references
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // 循环引用处理，设置为null禁用引用处理
+        options.JsonSerializerOptions.ReferenceHandler = null;
+    });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -59,7 +63,6 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     dbContext.Database.Migrate();
-    DbInitializer.Initialize(dbContext);
 }
 
 // Configure the HTTP request pipeline.

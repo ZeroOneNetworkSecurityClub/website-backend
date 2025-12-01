@@ -12,7 +12,17 @@ public class About
     [JsonIgnore]
     public List<string> Missions
     {
-        get => JsonSerializer.Deserialize<List<string>>(MissionsJson) ?? new List<string>();
+        get {
+            try {
+                return JsonSerializer.Deserialize<List<string>>(MissionsJson) ?? new List<string>();
+            } catch (JsonException) {
+                // 处理JSON反序列化异常，返回空列表
+                return new List<string>();
+            } catch (Exception) {
+                // 处理其他可能的异常
+                return new List<string>();
+            }
+        }
         set => MissionsJson = JsonSerializer.Serialize(value);
     }
     

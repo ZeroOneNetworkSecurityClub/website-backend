@@ -7,7 +7,7 @@
 ### 1.1 基础URL
 
 ```
-http://localhost:5174/api
+http://localhost:5132/api
 ```
 
 ### 1.2 认证方式
@@ -24,9 +24,9 @@ Authorization: Bearer <token>
 
 ```json
 {
-  "success": true,
-  "data": {},
-  "message": "请求成功"
+  "Success": true,
+  "Data": {},
+  "Message": "请求成功"
 }
 ```
 
@@ -34,9 +34,9 @@ Authorization: Bearer <token>
 
 ```json
 {
-  "success": false,
-  "data": null,
-  "message": "错误信息"
+  "Success": false,
+  "Data": null,
+  "Message": "错误信息"
 }
 ```
 
@@ -58,19 +58,21 @@ Authorization: Bearer <token>
 
 ```json
 {
-  "success": true,
-  "data": [
+  "Success": true,
+  "Data": [
     {
-      "id": number,
-      "title": string,
-      "date": string,
-      "location": string,
-      "description": string,
-      "status": string, // "upcoming" 或 "past"
-      "icon": string
+      "Id": number,
+      "Title": string,
+      "Date": string,
+      "Location": string,
+      "Description": string,
+      "Status": string, // "upcoming" 或 "past"
+      "Icon": string,
+      "CreatedAt": string,
+      "UpdatedAt": string
     }
   ],
-  "message": "请求成功"
+  "Message": "请求成功"
 }
 ```
 
@@ -120,19 +122,19 @@ GET /api/activities/latest?limit=5
 
 ```json
 {
-  "success": true,
-  "data": {
-    "id": number,
-    "title": string,
-    "date": string,
-    "location": string,
-    "description": string,
-    "status": string,
-    "icon": string,
-    "createdAt": string,
-    "updatedAt": string
+  "Success": true,
+  "Data": {
+    "Id": number,
+    "Title": string,
+    "Date": string,
+    "Location": string,
+    "Description": string,
+    "Status": string,
+    "Icon": string,
+    "CreatedAt": string,
+    "UpdatedAt": string
   },
-  "message": "请求成功"
+  "Message": "请求成功"
 }
 ```
 
@@ -160,18 +162,19 @@ GET /api/activities/1
 
 ```json
 {
-  "success": true,
-  "data": [
+  "Success": true,
+  "Data": [
     {
-      "id": number,
-      "name": string,
-      "position": string,
-      "description": string,
-      "type": string, // "core" 或 "general"
-      "avatar": string
+      "Id": number,
+      "Name": string,
+      "Position": string,
+      "Description": string,
+      "Type": string, // "Core" 或 "General"
+      "Avatar": string,
+      "JoinedAt": string
     }
   ],
-  "message": "请求成功"
+  "Message": "请求成功"
 }
 ```
 
@@ -198,17 +201,17 @@ GET /api/members?type=core
 
 ```json
 {
-  "success": true,
-  "data": {
-    "id": number,
-    "name": string,
-    "position": string,
-    "description": string,
-    "type": string,
-    "avatar": string,
-    "joinedAt": string
+  "Success": true,
+  "Data": {
+    "Id": number,
+    "Name": string,
+    "Position": string,
+    "Description": string,
+    "Type": string,
+    "Avatar": string,
+    "JoinedAt": string
   },
-  "message": "请求成功"
+  "Message": "请求成功"
 }
 ```
 
@@ -234,24 +237,29 @@ GET /api/members/1
 
 ```json
 {
-  "success": true,
-  "data": {
-    "background": string,
-    "missions": [string],
-    "history": [
+  "Success": true,
+  "Data": {
+    "Id": number,
+    "Background": string,
+    "Missions": [string],
+    "History": [
       {
-        "year": string,
-        "description": string
+        "Id": number,
+        "Year": string,
+        "Description": string,
+        "AboutId": number
       }
     ],
-    "organization": [
+    "Organization": [
       {
-        "name": string,
-        "description": string
+        "Id": number,
+        "Name": string,
+        "Description": string,
+        "AboutId": number
       }
     ]
   },
-  "message": "请求成功"
+  "Message": "请求成功"
 }
 ```
 
@@ -275,9 +283,9 @@ GET /api/about
 
 ```json
 {
-  "success": true,
-  "data": string,
-  "message": "请求成功"
+  "Success": true,
+  "Data": string,
+  "Message": "请求成功"
 }
 ```
 
@@ -301,9 +309,9 @@ GET /api/about/background
 
 ```json
 {
-  "success": true,
-  "data": [string],
-  "message": "请求成功"
+  "Success": true,
+  "Data": [string],
+  "Message": "请求成功"
 }
 ```
 
@@ -327,14 +335,16 @@ GET /api/about/mission
 
 ```json
 {
-  "success": true,
-  "data": [
+  "Success": true,
+  "Data": [
     {
-      "year": string,
-      "description": string
+      "Id": number,
+      "Year": string,
+      "Description": string,
+      "AboutId": number
     }
   ],
-  "message": "请求成功"
+  "Message": "请求成功"
 }
 ```
 
@@ -358,14 +368,16 @@ GET /api/about/history
 
 ```json
 {
-  "success": true,
-  "data": [
+  "Success": true,
+  "Data": [
     {
-      "name": string,
-      "description": string
+      "Id": number,
+      "Name": string,
+      "Description": string,
+      "AboutId": number
     }
   ],
-  "message": "请求成功"
+  "Message": "请求成功"
 }
 ```
 
@@ -391,28 +403,35 @@ GET /api/about/organization
 
 ```json
 {
-  "success": true,
-  "data": {
-    "details": [
+  "Success": true,
+  "Data": {
+    "Id": number,
+    "Details": [
       {
-        "type": string,
-        "value": string
+        "Id": number,
+        "Type": string,
+        "Value": string,
+        "ContactId": number
       }
     ],
-    "socialLinks": [
+    "SocialLinks": [
       {
-        "name": string,
-        "url": string
+        "Id": number,
+        "Name": string,
+        "Url": string,
+        "ContactId": number
       }
     ],
-    "joinUs": {
-      "description": string,
-      "conditions": [string],
-      "steps": [string],
-      "applicationUrl": string
+    "JoinUs": {
+      "Id": number,
+      "Description": string,
+      "Conditions": [string],
+      "Steps": [string],
+      "ApplicationUrl": string,
+      "ContactId": number
     }
   },
-  "message": "请求成功"
+  "Message": "请求成功"
 }
 ```
 
@@ -436,14 +455,16 @@ GET /api/contact
 
 ```json
 {
-  "success": true,
-  "data": [
+  "Success": true,
+  "Data": [
     {
-      "type": string,
-      "value": string
+      "Id": number,
+      "Type": string,
+      "Value": string,
+      "ContactId": number
     }
   ],
-  "message": "请求成功"
+  "Message": "请求成功"
 }
 ```
 
@@ -467,14 +488,16 @@ GET /api/contact/details
 
 ```json
 {
-  "success": true,
-  "data": [
+  "Success": true,
+  "Data": [
     {
-      "name": string,
-      "url": string
+      "Id": number,
+      "Name": string,
+      "Url": string,
+      "ContactId": number
     }
   ],
-  "message": "请求成功"
+  "Message": "请求成功"
 }
 ```
 
@@ -498,14 +521,16 @@ GET /api/contact/social
 
 ```json
 {
-  "success": true,
-  "data": {
-    "description": string,
-    "conditions": [string],
-    "steps": [string],
-    "applicationUrl": string
+  "Success": true,
+  "Data": {
+    "Id": number,
+    "Description": string,
+    "Conditions": [string],
+    "Steps": [string],
+    "ApplicationUrl": string,
+    "ContactId": number
   },
-  "message": "请求成功"
+  "Message": "请求成功"
 }
 ```
 
@@ -530,9 +555,9 @@ API可能返回以下错误状态码：
 
 ```json
 {
-  "success": false,
-  "data": null,
-  "message": "请求的资源不存在"
+  "Success": false,
+  "Data": null,
+  "Message": "请求的资源不存在"
 }
 ```
 
@@ -545,10 +570,17 @@ API可能返回以下错误状态码：
 当前API版本为v1，未来版本更新将通过URL路径进行区分，如：
 
 ```
-http://localhost:5174/api/v2/activities
+http://localhost:5132/api/v2/activities
 ```
 
 ## 9. 变更日志
+
+### 2025-12-01
+- 更新API文档，修正响应格式为camelCase
+- 修正基础URL端口为5132
+- 完善响应结构，添加完整的模型字段
+- 确保所有端点文档与实际实现一致
+- 更新所有响应示例以匹配实际API输出
 
 ### 2025-11-30
 - 初始版本发布
@@ -587,5 +619,5 @@ const apiClient = axios.create({
 
 ---
 
-**文档版本**: v1.0.0
-**最后更新**: 2025-11-30
+**文档版本**: v1.1.0
+**最后更新**: 2025-12-01

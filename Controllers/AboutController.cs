@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using website_backend.Models;
 using website_backend.Services;
+using website_backend.DTOs;
 
 namespace website_backend.Controllers;
 
@@ -19,7 +20,12 @@ public class AboutController : ControllerBase
     public async Task<IActionResult> GetAbout()
     {
         var about = await _aboutService.GetAboutAsync();
-        return Ok(ApiResponse<About>.SuccessResponse(about));
+        if (about == null)
+        {
+            return NotFound(ApiResponse<AboutDto>.ErrorResponse("About information not found."));
+        }
+        var aboutDto = about.ToDto();
+        return Ok(ApiResponse<AboutDto>.SuccessResponse(aboutDto));
     }
 
     [HttpGet("background")]
