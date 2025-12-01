@@ -1,3 +1,4 @@
+using System.Text.Json;
 using website_backend.Models;
 
 namespace website_backend.Data;
@@ -22,7 +23,7 @@ public static class DbInitializer
                 Location = "教学楼A101",
                 Description = "邀请业内专家讲解网络安全最新趋势和防护技巧",
                 Status = ActivityStatus.Upcoming,
-                Icon = "📚",
+                Icon = "book",
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
             },
@@ -33,7 +34,7 @@ public static class DbInitializer
                 Location = "实验楼B203",
                 Description = "针对CTF竞赛的专项培训，包括Web安全、逆向工程等",
                 Status = ActivityStatus.Upcoming,
-                Icon = "🏆",
+                Icon = "trophy",
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
             },
@@ -44,7 +45,7 @@ public static class DbInitializer
                 Location = "图书馆前广场",
                 Description = "新学期社团招新，欢迎对网络安全感兴趣的同学加入",
                 Status = ActivityStatus.Past,
-                Icon = "🎉",
+                Icon = "party",
                 CreatedAt = DateTime.Now.AddMonths(-1),
                 UpdatedAt = DateTime.Now.AddMonths(-1)
             }
@@ -111,28 +112,37 @@ public static class DbInitializer
         context.SaveChanges();
 
         // 初始化联系信息
-        var contact = new Contact
-        {
-            Details = new List<ContactDetail>
-            {
-                new ContactDetail { Type = "邮箱", Value = "contact@lingyi-sec.com" },
-                new ContactDetail { Type = "QQ群", Value = "123456789" }
-            },
-            SocialLinks = new List<SocialLink>
-            {
-                new SocialLink { Name = "GitHub", Url = "https://github.com/lingyi-sec" },
-                new SocialLink { Name = "微博", Url = "https://weibo.com/lingyi-sec" }
-            },
-            JoinUs = new JoinUsInfo
-            {
-                Description = "欢迎对网络安全感兴趣的同学加入我们！",
-                Conditions = new List<string> { "对网络安全感兴趣", "遵守社团章程", "积极参与活动" },
-                Steps = new List<string> { "填写申请表", "参加面试", "通过培训" },
-                ApplicationUrl = "https://example.com/join"
-            }
-        };
-
+        var contact = new Contact();
         context.Contact.Add(contact);
+        context.SaveChanges();
+
+        // 添加联系详情
+        var contactDetails = new List<ContactDetail>
+        {
+            new ContactDetail { Type = "邮箱", Value = "contact@lingyi-sec.com", ContactId = contact.Id },
+            new ContactDetail { Type = "QQ群", Value = "123456789", ContactId = contact.Id }
+        };
+        context.ContactDetails.AddRange(contactDetails);
+
+        // 添加社交媒体链接
+        var socialLinks = new List<SocialLink>
+        {
+            new SocialLink { Name = "GitHub", Url = "https://github.com/lingyi-sec", ContactId = contact.Id },
+            new SocialLink { Name = "微博", Url = "https://weibo.com/lingyi-sec", ContactId = contact.Id }
+        };
+        context.SocialLinks.AddRange(socialLinks);
+
+        // 添加加入我们信息
+        var joinUsInfo = new JoinUsInfo
+        {
+            Description = "欢迎对网络安全感兴趣的同学加入我们！",
+            ConditionsJson = JsonSerializer.Serialize(new List<string> { "对网络安全感兴趣", "遵守社团章程", "积极参与活动" }),
+            StepsJson = JsonSerializer.Serialize(new List<string> { "填写申请表", "参加面试", "通过培训" }),
+            ApplicationUrl = "https://example.com/join",
+            ContactId = contact.Id
+        };
+        context.JoinUsInfo.Add(joinUsInfo);
+
         context.SaveChanges();
     }
 }

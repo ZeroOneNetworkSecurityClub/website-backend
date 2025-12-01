@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MySql.EntityFrameworkCore.Extensions;
 using website_backend.Data;
 using website_backend.Middleware;
 using website_backend.Services;
@@ -9,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Database configuration
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("数据库连接字符串未配置")));
 
 // Add controllers
 builder.Services.AddControllers();
@@ -37,11 +38,27 @@ builder.Services.AddScoped<IContactService, ContactService>();
 
 var app = builder.Build();
 
+// Create database if not exists
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("数据库连接字符串未配置");
+}
+using (var connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString.Replace("Database=club_website;", "")))
+{
+    connection.Open();
+    using (var command = new MySql.Data.MySqlClient.MySqlCommand("CREATE DATABASE IF NOT EXISTS club_website;", connection))
+    {
+        command.ExecuteNonQuery();
+    }
+    connection.Close();
+}
+
 // Apply database migrations and seed data
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    dbContext.Database.EnsureCreated();
+    dbContext.Database.Migrate();
     DbInitializer.Initialize(dbContext);
 }
 
