@@ -1,0 +1,5 @@
+django-filter
+pillow
+Django
+requests
+djangorestframework

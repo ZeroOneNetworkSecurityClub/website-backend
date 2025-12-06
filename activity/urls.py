@@ -3,9 +3,8 @@
 # -*- coding: utf-8 -*-
 
 from django.urls import path
-from . import views
-
+from activity.views import activity_list
 
 urlpatterns = [
-    path(r'list',views.activity_list,name='activity_list'),
+    path('list', activity_list, name='activity_list'),
 ]
