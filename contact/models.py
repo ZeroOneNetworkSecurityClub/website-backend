@@ -1,19 +1,5 @@
 from django.db import models
 
-class Contact(models.Model):
-    """
-    联系我们表
-    """
-    id = models.AutoField(primary_key=True)
-    details = models.CharField(max_length=100,verbose_name='姓名')
-    socialLinks = models.CharField(max_length=100,verbose_name='邮箱')
-    joinUs = models.CharField(max_length=100,verbose_name='手机号')
-
-    class Meta:
-        verbose_name = '联系我们'
-        verbose_name_plural = '联系我们'
-
-
 class Details(models.Model):
     """
     详情表
@@ -53,3 +39,17 @@ class JoinUs(models.Model):
     class Meta:
         verbose_name = '加入我们'
         verbose_name_plural = '加入我们'
+
+
+class Contact(models.Model):
+    """
+    联系我们表
+    """
+    id = models.AutoField(primary_key=True)
+    details = models.ForeignKey(Details, on_delete=models.CASCADE, verbose_name='详情')
+    socialLinks = models.ForeignKey(Social, on_delete=models.CASCADE, verbose_name='社交信息')
+    joinUs = models.ForeignKey(JoinUs, on_delete=models.CASCADE, verbose_name='加入我们')
+
+    class Meta:
+        verbose_name = '联系我们'
+        verbose_name_plural = '联系我们'

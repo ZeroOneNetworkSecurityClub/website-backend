@@ -11,8 +11,6 @@ class Member(models.Model):
     position = models.CharField(max_length=100,verbose_name='成员职位')
     # 描述
     description = models.TextField(verbose_name='描述')
-    # 成员类型
-    type = models.CharField(max_length=100,verbose_name='成员类型')
     # 头像
     avatar = models.TextField(verbose_name='头像')
     # 加入时间
@@ -23,4 +21,4 @@ class Member(models.Model):
 
     class Meta:
         verbose_name = '成员'
-        verbose_name_plural = '成员'
+        verbose_name_plural = verbose_name

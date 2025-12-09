@@ -93,13 +93,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # 国际化
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # 静态文件 (CSS, JavaScript, Images)
 STATIC_URL = 'static/'

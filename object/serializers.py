@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import Object
+
+from object.models import Object
+
 
 class ObjectSerializer(serializers.ModelSerializer):
     file_url = serializers.SerializerMethodField()

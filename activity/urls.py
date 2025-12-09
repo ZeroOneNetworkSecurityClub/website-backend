@@ -3,6 +3,7 @@
 # -*- coding: utf-8 -*-
 
 from django.urls import path
+
 from activity.views import activity_list, activity_detail, activity_page
 
 urlpatterns = [

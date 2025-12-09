@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from requests import Response
 from rest_framework.decorators import api_view
 
@@ -10,7 +9,7 @@ from utils.response import Response
 #  活动列表
 @api_view(['GET'])
 def activity_list(request):
-    activities = Activity.objects.all()
+    activities = Activity.objects.all().order_by('date')
     serializer = ActivitySerializer(activities, many=True)
     return Response.success(data=serializer.data)
 

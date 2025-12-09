@@ -21,7 +21,9 @@ class History(models.Model):
     """
     id = models.AutoField(primary_key=True)
     year = models.CharField(max_length=100,verbose_name='时间')
-    description = models.TextField(verbose_name='内容')
+    title = models.CharField(max_length=100,verbose_name='标题')
+    tag = models.CharField(max_length=100,verbose_name='标签')
+    content = models.TextField(verbose_name='内容')
 
     class Meta:
         verbose_name = '历史'
