@@ -10,6 +10,16 @@ class Response:
         return Response.error('操作失败', code=400)
         return Response.redirect('/home/')
     """
+    @staticmethod
+    def simple_success(message='Success', status=200):
+        """简易成功响应"""
+        response_data = {
+            'success': True,
+            'code': status,
+            'message': message,
+            'timestamp': Response._get_timestamp()
+        }
+        return JsonResponse(response_data, status=status)
 
     @staticmethod
     def success(data=None, message='Success', status=200):
@@ -30,7 +40,6 @@ class Response:
             'success': False,
             'code': code,
             'message': message,
-            'data': data,
             'timestamp': Response._get_timestamp()
         }
         return JsonResponse(response_data, status=status)

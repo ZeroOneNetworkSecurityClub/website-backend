@@ -3,9 +3,13 @@
 # -*- coding: utf-8 -*-
 
 from django.urls import path
-from . import views
 
+from activity.views import activity_list, activity_detail, activity_page
 
 urlpatterns = [
-    path(r'list',views.activity_list,name='activity_list'),
+    path('list', activity_list, name='activity_list'),
+
+    path('page', activity_page, name='activity_page'),
+
+    path('detail/<int:pk>', activity_detail, name='activity_detail'),
 ]

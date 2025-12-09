@@ -1,21 +1,19 @@
+import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# 在项目内部像这样构建路径：BASE_DIR / 'subdir'。
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# SECURITY WARNING: keep the secret key used in production secret!
+# 快速启动开发设置 - 不适合生产
+# 安全警告：请保守生产中使用的密钥！
 SECRET_KEY = 'django-insecure-0^+5#zm#*=1@!u$f+cib=90hjvcgk@2fa&di(=zo**+o+ky%82'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# 安全警告：不要在生产环境中开启调试运行！
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
-# Application definition
-
+# 应用配置
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,13 +22,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'activity',
+    'object',
+    'member',
+    'about',
+    'contact',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -40,20 +42,24 @@ ROOT_URLCONF = 'website_backend.urls'
 
 WSGI_APPLICATION = 'website_backend.wsgi.application'
 
-
-# Database
-
+# 数据库
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # 数据库引擎
-        'NAME': 'club_website',                      # 数据库名
-        'USER': 'root',                       # MySQL用户名
-        'PASSWORD': '123456',                 # MySQL密码
-        'HOST': 'localhost',                  # 数据库地址
-        'PORT': '3306',                       # 端口 (默认3306)
+        'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
+        'NAME': 'club_website',  # 数据库名
+        'USER': 'root',  # MySQL用户名
+        'PASSWORD': '123456',  # MySQL密码
+        'HOST': 'localhost',  # 数据库地址
+        'PORT': '3306',  # 端口 (默认3306)
     }
 }
 
+# 对象文件 URL 前缀
+MEDIA_URL = '/file/'
+# 对象文件根目录
+MEDIA_ROOT = os.path.join(BASE_DIR, 'file/')
+
+# 模板设置
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -70,8 +76,7 @@ TEMPLATES = [
     },
 ]
 
-# Password validation
-
+# 密码验证
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -87,18 +92,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# 国际化
+LANGUAGE_CODE = 'zh-hans'
 
-# Internationalization
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
-
-# Static files (CSS, JavaScript, Images)
-
+# 静态文件 (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
